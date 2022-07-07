@@ -661,8 +661,12 @@ public class RedisDatabaseMetadata implements DatabaseMetaData {
         LOGGER.log("getSchemas()");
         ResultSet rs;
         Statement statement = connection.createStatement();
+        String get="CONFIG get databases";
+        ResultSet resultSet = statement.executeQuery(get);
+        resultSet.next();
+        resultSet.next();
 
-        String[] databases = IntStream.range(0, 16)
+        String[] databases = IntStream.range(0, Integer.valueOf(resultSet.getString(0)))
                 .mapToObj(i -> i + "")
                 .toArray(String[]::new);
         rs = new RedisResultSet(databases, statement);

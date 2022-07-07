@@ -14,11 +14,11 @@ public class RedisTest {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         Class.forName("com.itmuch.redis.jdbc.redis.RedisDriver");
 
-        Connection connection = DriverManager.getConnection("jdbc:redis://localhost:6379/0");
+        Connection connection = DriverManager.getConnection("jdbc:redis://10.4.41.79:6379/0");
         Statement statement = connection.createStatement();
 
         connection.setSchema("11");
-        ResultSet rs = statement.executeQuery("get a");
+        ResultSet rs = statement.executeQuery("CONFIG get databases");
         while (rs.next()) {
             String string = rs.getString(0);
             System.out.println(string);
